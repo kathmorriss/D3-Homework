@@ -1,5 +1,6 @@
 // @TODO: YOUR CODE HERE!
-// Define SVG attributes
+
+// Setting the dimensions for the SVG container
 var width = parseInt(d3.select('#scatter')
     .style("width"));
 
@@ -15,8 +16,7 @@ var svg = d3.select("#scatter")
     .attr("height", height)
     .attr("class", "chart");
 
-// Labels for axes=================================
-// Add first g - tag for x axis text (css class)
+// Labels for axes
 svg.append("g").attr("class", "xText");
 var xText = d3.select(".xText");
 
@@ -28,8 +28,7 @@ xText.attr("transform",`translate(
     ${bottomTextY})`
     );
 
-// x-axis (bottom) ______________________________
-// Build xText details (css class)
+// x-axis
 xText.append("text")
     .attr("y", -19)
     .attr("data-name", "poverty")
@@ -37,20 +36,7 @@ xText.append("text")
     .attr("class","aText active x")
     .text("In Poverty (%)");
 
-xText.append("text")
-    .attr("y", 0)
-    .attr("data-name", "age")
-    .attr("data-axis", "x")
-    .attr("class","aText inactive x")
-
-xText.append("text")
-    .attr("y", 19)
-    .attr("data-name", "income")
-    .attr("data-axis", "x")
-    .attr("class","aText inactive x")
-
-// y-axis (left)___________________________________
-// Second g tag for yText (css class)
+// y-axis
 svg.append("g").attr("class", "yText");
 var yText = d3.select(".yText");
 
@@ -84,8 +70,7 @@ yText .append("text")
     .attr("data-axis", "y")
     .attr("class", "aText inactive y")
     
-// Visualize data  _______________________________________  
-// Define dynamic circle radius
+// define radius 
 var cRadius;
 function adjustRadius() {
   if (width <= 530) {
@@ -95,7 +80,7 @@ function adjustRadius() {
 }
 adjustRadius();
 
-// Read in data as promise... and then... newer d3.js method
+//use d3 method to read in csv file of data
 d3.csv("assets/data/data.csv").then(function(data) {
     visualize(data);
 });
@@ -106,7 +91,7 @@ function visualize (csvData) {
    var yMin;
    var yMax;
 
-   // Current X & Y default selections
+   // defaulty X & Y labels
    var currentX = "poverty";
    var currentY = "obesity";
 
@@ -334,7 +319,7 @@ function visualize (csvData) {
                         });
                   });
 
-                  // change the classes of to active and the clicked label
+                  
                   labelUpdate(axis, self);
                 }
               }
